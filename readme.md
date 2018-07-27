@@ -19,10 +19,10 @@ $ git clone https://github.com/sat10am/JavaScript30.git && cd Javascript30
 $ git checkout -b <YOUR-NAME> origin/develop # develop branch 기준으로 새 사용자 브랜치 생성
 
 # yarn 이 있을경우
-$ yarn init -y && yarn && yarn run ch1 # {ch[1-30]}
+$ yarn && yarn run ch1 # {ch[1-30]}
 
 # yarn 이 없을경우
-$ npm init -y && npm i && npm run ch1 # {ch[1-30]}
+$ npm i && npm run ch1 # {ch[1-30]}
 
 # 작업 완료 후
 $ git push -u origin <YOUR-NAME> # PUSH를 위해 조직에 개발자로서 초대 필요
