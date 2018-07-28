@@ -86,45 +86,20 @@
   </ul>
   <script>
     ((document) => {
-      document.addEventListener('keydown', ({
-        keyCode
-      }) => {
-        const playingEl = document.querySelector(`.playing`);
-        playingEl && playingEl.classList.remove('playing')
+      document.addEventListener('keydown', ({keyCode}) => {
+        const audiosEl = document.querySelector(`audio[data-key="${keyCode}"]`);
 
-        const audiosEl = document.querySelectorAll('audio');
-        const targetEl = [...audiosEl].find(el => +(el.dataset.key) === keyCode)
+        if(audiosEl!==null){
+          audiosEl.play();
 
-        targetEl.play();
-
-        const keyBox = document.querySelector(`.keys > li[data-key="${keyCode}"]`);
-        keyBox.classList.add('playing')
-        keyBox.addEventListener('transitionend', ({
-          target
-        }) => {
-          target.classList.remove('playing')
-        })
-
-
-
+          const keyEl = document.querySelector(`.keys > li[data-key="${keyCode}"]`);
+          keyEl.classList.add('playing')
+          keyEl.addEventListener('transitionend', ({target}) => target.classList.remove('playing'))
+          
+          }
       })
-
-
-
     })(document)
-
-
-    //     const keys = document.querySelector('.keys')
-    //     console.dir(keys);
-    //     keys.addEventListener('click', ({
-    //       target
-    //     }) => {
-    //       console.dir(target)
-    //       if (target.className !== 'key') return;
-    //
   </script>
-
-
 </body>
 
 </html>
