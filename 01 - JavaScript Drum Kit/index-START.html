@@ -61,15 +61,15 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-$('body')
-  .on('keyup', function(e){
-    $('div [data-key="'+e.keyCode+'"]').addClass('playing');
-    $('audio[data-key="'+e.keyCode+'"]').trigger('play');
-    $('audio[data-key="'+e.keyCode+'"]').prop('currentTime', 0);
-  })
-  .on('transitionend', function(){
-    $('div').removeClass('playing')
-  });
+window.addEventListener('keyup', function(e) {
+  document.querySelector('audio[data-key="'+e.keyCode+'"]').currentTime = 0;
+  document.querySelector('audio[data-key="'+e.keyCode+'"]').play();
+  document.querySelector('div[data-key="'+e.keyCode+'"]').classList.add('playing');
+});
+
+window.addEventListener('webkitTransitionEnd', function(e) {
+  e.target.classList.remove('playing');
+});
 </script>
 
 </body>
