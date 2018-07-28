@@ -63,10 +63,11 @@
 <script>
 $('body')
   .on('keyup', function(e){
-    $('[data-key="'+e.keyCode+'"]:eq(0)').addClass('playing');
-    $('[data-key="'+e.keyCode+'"]:eq(1)').trigger('play');
+    $('div [data-key="'+e.keyCode+'"]').addClass('playing');
+    $('audio[data-key="'+e.keyCode+'"]').trigger('play');
+    $('audio[data-key="'+e.keyCode+'"]').prop('currentTime', 0);
   })
-  .on('transitionend webkitTransitionEnd oTransitionEnd', function(){
+  .on('transitionend', function(){
     $('div').removeClass('playing')
   });
 </script>
