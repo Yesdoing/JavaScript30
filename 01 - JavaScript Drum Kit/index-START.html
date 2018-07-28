@@ -59,28 +59,47 @@
 
 <script>
   ((window, document) => {
-    const removeClass = e => e.target.classList.remove('playing');
-    const findElementByDataAttribute = (selector, dataAttr, value) => {
-      return document.querySelector(`${selector}[${dataAttr}="${value}"]`)
+    
+    const $ = selector => {
+      const $element = document.querySelectorAll(selector);
+      return $element.length === 1 ? $element[0] : $element;
     };
-    const playAudio = $audio => { $audio.currentTime = 0; $audio.play() };
-    const playDrum = e => {
-      const { keyCode } = e;
-      const $audio = findElementByDataAttribute('audio', 'data-key', keyCode);
-      if (!$audio) return;
-      
-      const $key = findElementByDataAttribute('.key', 'data-key', keyCode);
-      $key.classList.add('playing');
-      playAudio($audio);
+    
+    const elementFunctions = {
+      removeClass(className) {
+        return e => e.target.classList.remove(className);
+      },
+      findElementByDataAttribute(selector, dataAttr, value) {
+        return $(`${selector}[${dataAttr}="${value}"]`)
+      },
+      playAudio($audio) {
+        $audio.currentTime = 0;
+        $audio.play()
+      }
+    };
+    
+    const setKeyElementsEvent = () => {
+      const $keys = $('.key');
+      $keys.forEach($key => $key.addEventListener('transitionend', elementFunctions.removeClass('playing')));
+    };
+    
+    const setKeyDownEvent = () => {
+      window.addEventListener('keydown', e => {
+        const { keyCode } = e;
+        const $audio = elementFunctions.findElementByDataAttribute('audio', 'data-key', keyCode);
+        if (!$audio) return;
+
+        const $key = elementFunctions.findElementByDataAttribute('.key', 'data-key', keyCode);
+        $key.classList.add('playing');
+        elementFunctions.playAudio($audio);
+      });
     };
 
-    const $keys = document.querySelectorAll('.key');
-    $keys.forEach($key => $key.addEventListener('transitionend', removeClass));
+    setKeyElementsEvent();
+    setKeyDownEvent();
     
-    window.addEventListener('keydown', playDrum);
   })(window, document);
 </script>
-
 
 </body>
 </html>
