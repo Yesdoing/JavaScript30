@@ -63,12 +63,77 @@
       position: absolute;
       top:50%;
     }
+    .hour-hand {
+      background: #fa5252;
+      height: 6px;
+      
+    }
+    .second-hand {
+      background: #2f9e44;
+      height: 2px;
+    }
+    .min-hand {
+      background: #f59f00;
+      height: 4px;
+    }
+    .init-time {
+      transform: rotate(90deg);
+      transform-origin: right center;
+    }
+
+
 
   </style>
-
+  
   <script>
-    
+  ((document)=> {
+    const qs = (selector, target=document)=>target.querySelector(selector)
+    const qsa = (selector, target=document)=>target.querySelectorAll(selector)
+   
+    const initTimerElStyle = (timeEls)=> {
+      [...timeEls].forEach(el=> {
+        el.classList.add('init-time')
+      })
+    }
 
+    const startTimer  = ()=> {
+
+      const timeEls= {
+        hourEl: qs('.hour-hand'),
+        minEl: qs('.min-hand'),
+        secEl: qs('.second-hand')
+      }
+
+      const hourDeg = (hour, revisionDeg = 90)=> revisionDeg + hour*30;
+      const minSecDeg = (minSec, revisionDeg = 90)=> revisionDeg + minSec*6;
+
+      const rotateEl = (el, time, fnDeg) => el.style.transform = `rotate(${fnDeg(time)}deg)`;
+
+      const displayTime = ({hourEl, minEl, secEl}) => {
+      
+      const time = new Date();
+      const  hour =  time.getHours()%12;
+      const  min = time.getMinutes();
+      const  sec =  time.getSeconds();
+
+      rotateEl(hourEl, hour,  hourDeg);
+      rotateEl(minEl, min,  minSecDeg);
+      rotateEl(secEl, sec,  minSecDeg);
+
+      setTimeout(()=>displayTime(timeEls),1000)
+      }  
+
+      displayTime(timeEls)
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      initTimerElStyle(qsa('.hand'))
+      startTimer();
+      })
+  })(document)
+
+  // question1
+  // const hour = qs('.hand hour-hand') 클래스 중첩 찾는 법?
   </script>
 </body>
 </html>
