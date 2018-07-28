@@ -86,18 +86,25 @@
   </ul>
   <script>
     ((document) => {
-      document.addEventListener('keydown', ({keyCode}) => {
+
+      const removeTransition = e => {
+        if (e.propertyName !== 'transform') return;
+        e.target.classList.remove('playing');
+      }
+
+      const playSound = keyCode => {
         const audiosEl = document.querySelector(`audio[data-key="${keyCode}"]`);
+        
+        if(audiosEl===null) return;
+        audiosEl.currentTime = 0;
+        audiosEl.play();
 
-        if(audiosEl!==null){
-          audiosEl.play();
+        const keyEl = document.querySelector(`.keys > li[data-key="${keyCode}"]`);
+        keyEl.classList.add('playing')
+        keyEl.addEventListener('transitionend', removeTransition)
+      }
 
-          const keyEl = document.querySelector(`.keys > li[data-key="${keyCode}"]`);
-          keyEl.classList.add('playing')
-          keyEl.addEventListener('transitionend', ({target}) => target.classList.remove('playing'))
-          
-          }
-      })
+      document.addEventListener('keydown', ({keyCode}) => playSound(keyCode))
     })(document)
   </script>
 </body>
