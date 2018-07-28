@@ -62,6 +62,8 @@
       background:black;
       position: absolute;
       top:50%;
+      transform: rotate(90deg);
+      transform-origin: right center;
     }
     .hour-hand {
       background: #fa5252;
@@ -76,26 +78,13 @@
       background: #f59f00;
       height: 4px;
     }
-    .init-time {
-      transform: rotate(90deg);
-      transform-origin: right center;
-    }
-
-
 
   </style>
   
   <script>
   ((document)=> {
     const qs = (selector, target=document)=>target.querySelector(selector)
-    const qsa = (selector, target=document)=>target.querySelectorAll(selector)
    
-    const initTimerElStyle = (timeEls)=> {
-      [...timeEls].forEach(el=> {
-        el.classList.add('init-time')
-      })
-    }
-
     const startTimer  = ()=> {
 
       const timeEls= {
@@ -127,7 +116,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', ()=>{
-      initTimerElStyle(qsa('.hand'))
       startTimer();
       })
   })(document)
