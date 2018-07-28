@@ -10,3 +10,4 @@
 
 ## Tips
 - `<audio>` 객체는 `play` method 로 재생할 수 있습니다.
+- `transitionend` 이벤트를 사용하여 toggle class를 구현
