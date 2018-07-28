@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
   <link rel="stylesheet" href="style.css">
-</head>
+  <script
+  src="https://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
 <body>
 
 
@@ -58,9 +61,15 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-
+$('body')
+  .on('keyup', function(e){
+    $('[data-key="'+e.keyCode+'"]:eq(0)').addClass('playing');
+    $('[data-key="'+e.keyCode+'"]:eq(1)').trigger('play');
+  })
+  .on('transitionend webkitTransitionEnd oTransitionEnd', function(){
+    $('div').removeClass('playing')
+  });
 </script>
-
 
 </body>
 </html>

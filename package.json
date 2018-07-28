@@ -5,7 +5,7 @@
   "repository": "git@github.com:sat10am/JavaScript30.git",
   "license": "MIT",
   "scripts": {
-    "ch30": "browser-sync start --server --browser \"google chrome\" --files=\"30 - Whack A Mole/*\" --startPath=\"30 - Whack A Mole/index-START.html\"",
+    "ch30": "browser-sync start --server --browser \"chromium-browser\" --files=\"30 - Whack A Mole/*\" --startPath=\"30 - Whack A Mole/index-START.html\"",
     "ch29": "browser-sync start --server --browser \"google chrome\" --files=\"29 - Countdown Timer/*\" --startPath=\"29 - Countdown Timer/index-START.html\"",
     "ch28": "browser-sync start --server --browser \"google chrome\" --files=\"28 - Video Speed Controller/*\" --startPath=\"28 - Video Speed Controller/index-START.html\"",
     "ch27": "browser-sync start --server --browser \"google chrome\" --files=\"27 - Click and Drag/*\" --startPath=\"27 - Click and Drag/index-START.html\"",
@@ -34,7 +34,7 @@
     "ch4": "browser-sync start --server --browser \"google chrome\" --files=\"04 - Array Cardio Day 1/*\" --startPath=\"04 - Array Cardio Day 1/index-START.html\"",
     "ch3": "browser-sync start --server --browser \"google chrome\" --files=\"03 - CSS Variables/*\" --startPath=\"03 - CSS Variables/index-START.html\"",
     "ch2": "browser-sync start --server --browser \"google chrome\" --files=\"02 - JS and CSS Clock/*\" --startPath=\"02 - JS and CSS Clock/index-START.html\"",
-    "ch1": "browser-sync start --server --browser \"google chrome\" --files=\"01 - JavaScript Drum Kit/*\" --startPath=\"01 - JavaScript Drum Kit/index-START.html\""
+    "ch1": "browser-sync start --server --browser \"google-chrome\" --files=\"01 - JavaScript Drum Kit/*\" --startPath=\"01 - JavaScript Drum Kit/index-START.html\""
   },
   "devDependencies": {
     "browser-sync": "^2.24.6"
