@@ -69,7 +69,8 @@
   class Clock {
     constructor($clockHands) {
       this.$clockHands = $clockHands;
-      this.INTERVAL = 1000;
+      this.TIME_INVERVAL = 1000;
+      this.interval = null
     }
 
     rotate() {
@@ -81,7 +82,7 @@
     }
 
     tickTock() {
-      setInterval(this.rotate.bind(this), this.INTERVAL)
+      this.interval = this.interval || setInterval(this.rotate.bind(this), this.TIME_INVERVAL)
     }
   }
 
@@ -102,6 +103,10 @@
 
   const clock = new Clock($clockHands);
   clock.tickTock();
+  window.onbeforeunload = () => {
+    clearInterval(clock.interval)
+  }
+  
 
 </script>
 </body>
