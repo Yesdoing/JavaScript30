@@ -26,5 +26,9 @@ $ npm i && npm run ch1 # {ch[1-30]}
 
 # 작업 완료 후
 $ git push -u origin <YOUR-NAME> # PUSH를 위해 조직에 개발자로서 초대 필요
+
+# develop branch에 추가된 README를 내 branch로 불러올 경우
+$ git checkout <YOUR-BRANCH>
+$ git merge develop # develop 에 추가된 각 챕터별 README.md 파일을 업데이트 할 수 있음
 ```
 
