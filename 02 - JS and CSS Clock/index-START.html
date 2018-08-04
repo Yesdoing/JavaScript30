@@ -64,6 +64,7 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: right;
     }
   </style>
 
@@ -75,33 +76,15 @@
       const $minute = document.querySelector('.hand.min-hand');
       const $second = document.querySelector('.hand.second-hand');
 
-      $second.style.transformOrigin = 'right';
-      $minute.style.transformOrigin = 'right';
-      $hour.style.transformOrigin = 'right';
-
-
-      function showTime(date) {
-
-        this._sec = date.getSeconds();
-        this._min = date.getMinutes();
-        this._hour = date.getHours() - 12;
-
+      function showTime() {
         this._secnminDegree = 6;
         this._hourDegree = 30;
 
         return function () {
-
-          if (this._sec < 60) {
-            this._sec++;
-          } else {
-            this._sec = 1;
-            this._min++;
-          }
-          if (this._min === 60) {
-            this._min = 1;
-            this._hour++;
-            if (this._hour === 12) this._hour = 0;
-          }
+          const date = new Date();
+          this._sec = date.getSeconds();
+          this._min = date.getMinutes();
+          this._hour = date.getHours() - 12;
 
           $second.style.transform = `rotate(${(this._sec * this._secnminDegree) + 90}deg)`;
           $minute.style.transform = `rotate(${(this._min * this._secnminDegree) + 90}deg)`;
