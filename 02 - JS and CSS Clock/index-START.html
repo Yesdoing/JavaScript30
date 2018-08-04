@@ -66,48 +66,49 @@
 </style>
 
 <script>
-  class Clock {
-    constructor($clockHands) {
-      this.$clockHands = $clockHands;
-      this.TIME_INVERVAL = 1000;
-      this.interval = null
+  ((w, d) => {
+    const Clock = class {
+      constructor($clockHands) {
+        this.$clockHands = $clockHands;
+        this.TIME_INVERVAL = 1000;
+        this.interval = null
+      }
+
+      rotate() {
+        Object.values(this.$clockHands).map($clockHand => {
+          const rad = $clockHand.currentTime() * 6;
+          $clockHand.dom.style.transformOrigin = 'right';
+          $clockHand.dom.style.transform = `rotate(${90 + rad}deg)`
+        })
+      }
+
+      tickTock() {
+        this.interval = this.interval || setInterval(this.rotate.bind(this), this.TIME_INVERVAL)
+      }
     }
 
-    rotate() {
-      Object.values(this.$clockHands).map($clockHand => {
-        const rad = $clockHand.currentTime() * 6;
-        $clockHand.dom.style.transformOrigin = 'right';
-        $clockHand.dom.style.transform = `rotate(${90 + rad}deg)`
-      })
+    const $clockHands = {
+      second: {
+        dom: d.querySelector('.second-hand'),
+        currentTime() { return new Date().getSeconds() }
+      },
+      min: {
+        dom: d.querySelector('.min-hand'),
+        currentTime() { return new Date().getMinutes() }
+      },
+      hour: {
+        dom: d.querySelector('.hour-hand'),
+        currentTime() { return new Date().getHours() }
+      },
+    };
+
+    const clock = new Clock($clockHands);
+    clock.tickTock();
+    w.onbeforeunload = () => {
+      clearInterval(clock.interval)
     }
-
-    tickTock() {
-      this.interval = this.interval || setInterval(this.rotate.bind(this), this.TIME_INVERVAL)
-    }
-  }
-
-  const $clockHands = {
-    second: {
-      dom: document.querySelector('.second-hand'),
-      currentTime() { return new Date().getSeconds() }
-    },
-    min: {
-      dom: document.querySelector('.min-hand'),
-      currentTime() { return new Date().getMinutes() }
-    },
-    hour: {
-      dom: document.querySelector('.hour-hand'),
-      currentTime() { return new Date().getHours() }
-    },
-  };
-
-  const clock = new Clock($clockHands);
-  clock.tickTock();
-  window.onbeforeunload = () => {
-    clearInterval(clock.interval)
-  }
+  })(window, document)
   
-
 </script>
 </body>
 </html>
