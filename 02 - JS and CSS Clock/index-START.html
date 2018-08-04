@@ -94,11 +94,11 @@
           if (this._sec < 60) {
             this._sec++;
           } else {
-            this._sec = 0;
+            this._sec = 1;
             this._min++;
           }
           if (this._min === 60) {
-            this._min = 0;
+            this._min = 1;
             this._hour++;
             if (this._hour === 12) this._hour = 0;
           }
