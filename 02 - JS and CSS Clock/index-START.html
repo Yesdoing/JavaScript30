@@ -77,18 +77,18 @@
       const $second = document.querySelector('.hand.second-hand');
 
       function showTime() {
-        this._secnminDegree = 6;
-        this._hourDegree = 30;
+        const _secnminDegree = 6;
+        const _hourDegree = 30;
 
         return function () {
           const date = new Date();
-          this._sec = date.getSeconds();
-          this._min = date.getMinutes();
-          this._hour = date.getHours() - 12;
+          const _sec = date.getSeconds();
+          const _min = date.getMinutes();
+          const _hour = date.getHours() - 12;
 
-          $second.style.transform = `rotate(${(this._sec * this._secnminDegree) + 90}deg)`;
-          $minute.style.transform = `rotate(${(this._min * this._secnminDegree) + 90}deg)`;
-          $hour.style.transform = `rotate(${(this._hour * this._hourDegree) + 90}deg)`;
+          $second.style.transform = `rotate(${(_sec * _secnminDegree) + 90}deg)`;
+          $minute.style.transform = `rotate(${(_min * _secnminDegree) + 90}deg)`;
+          $hour.style.transform = `rotate(${(_hour * _hourDegree) + 90}deg)`;
         }
       }
 
