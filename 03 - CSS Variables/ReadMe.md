@@ -23,3 +23,11 @@ Javascript 에서의 CSS Variable API 또한 문서 아래쪽에 있습니다.
 
 ```
 이렇게 하니까 적용이 안 된다.  `:root`를 지켜야 되나?
+
+
+
+아쉬움 
+
+1. 문제를 잘 보자 ... data-sizing을 왜 해줬나? 
+` const suffix = dataset.sizing || '';
+`

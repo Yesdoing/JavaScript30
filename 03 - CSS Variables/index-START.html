@@ -66,15 +66,18 @@
       const qs = (selector, target=document)=>target.querySelector(selector)
       const img = qs('img')
   
-      qs('.controls').addEventListener('change', ({target})=>{
+      const handlerControllerChanged = ({target})=>{
         if(target.nodeName!=='INPUT') return ;
 
         const isbase = target.id==='base';
-        const changedValue = isbase ?target.value : `${target.value}px`
-        
+        const sizing = target.dataset.sizing||'';
+        const changedValue = target.value+sizing
+
         img.style.setProperty(`--${target.id}`, changedValue);
         if(base) qs('.hl').style.setProperty(`--${target.id}`,changedValue); 
-      })
+      }
+
+      qs('.controls').addEventListener('change', handlerControllerChanged)
     })
 
     })(document)
