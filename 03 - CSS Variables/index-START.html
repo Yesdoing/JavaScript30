@@ -26,23 +26,22 @@
       misc styles, nothing to do with CSS variables
     */
     :root {
-       --chose-color: #ffc600;
+       --base: #ffc600;
        --blur: 10px;
        --spacing: 10px;
     }
     img {
-      background-color: var(--chose-color);
+      background-color: var(--base);
       filter: blur(var(--blur));
       padding: var(--spacing);
     }
 
     .hl {
-      color: var(--chose-color);
+      color: var(--base);
     }
 
     body {
       text-align: center;
-      /* background:  var(--chose-color); */
       background: #193549;
       color: white;
       font-family: 'helvetica neue', sans-serif;
@@ -65,17 +64,21 @@
 
       const qs = (selector, target=document)=>target.querySelector(selector)
       const img = qs('img')
-      
-        qs('#base').addEventListener('change', ({target})=>{
-          img.style.setProperty("--chose-color",target.value);  
-        })
-        qs('#blur').addEventListener('change', ({target})=>{
-          img.style.setProperty("--blur",`${target.value}px`);  
+  
+      qs('.controls').addEventListener('change', ({target})=>{
+        if(target.nodeName!=='INPUT') return ;
+        img.style.setProperty(`--${target.id}`,target.value); 
+      })
+        // qs('#base').addEventListener('change', ({target})=>{
+        //   img.style.setProperty("--chose-color",target.value);  
+        // })
+        // qs('#blur').addEventListener('change', ({target})=>{
+        //   img.style.setProperty("--blur",`${target.value}px`);  
           
-        })
-        qs('#spacing').addEventListener('change', ({target})=>{
-          img.style.setProperty("--spacing",`${target.value}px`);  
-        })
+        // })
+        // qs('#spacing').addEventListener('change', ({target})=>{
+        //   img.style.setProperty("--spacing",`${target.value}px`);  
+        // })
       })
 
     })(document)
