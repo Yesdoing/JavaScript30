@@ -60,6 +60,7 @@
 
   <script>
     ((document)=>{
+
       document.addEventListener('DOMContentLoaded', ()=>{
 
       const qs = (selector, target=document)=>target.querySelector(selector)
@@ -67,19 +68,14 @@
   
       qs('.controls').addEventListener('change', ({target})=>{
         if(target.nodeName!=='INPUT') return ;
-        img.style.setProperty(`--${target.id}`,target.value); 
+
+        const isbase = target.id==='base';
+        const changedValue = isbase ?target.value : `${target.value}px`
+        
+        img.style.setProperty(`--${target.id}`, changedValue);
+        if(base) qs('.hl').style.setProperty(`--${target.id}`,changedValue); 
       })
-        // qs('#base').addEventListener('change', ({target})=>{
-        //   img.style.setProperty("--chose-color",target.value);  
-        // })
-        // qs('#blur').addEventListener('change', ({target})=>{
-        //   img.style.setProperty("--blur",`${target.value}px`);  
-          
-        // })
-        // qs('#spacing').addEventListener('change', ({target})=>{
-        //   img.style.setProperty("--spacing",`${target.value}px`);  
-        // })
-      })
+    })
 
     })(document)
   </script>
