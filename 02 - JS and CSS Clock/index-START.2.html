@@ -9,6 +9,18 @@
 
     <div class="clock">
       <div class="clock-face">
+        <div class="number">1</div>
+        <div class="number">2</div>
+        <div class="number">3</div>
+        <div class="number">4</div>
+        <div class="number">5</div>
+        <div class="number">6</div>
+        <div class="number">7</div>
+        <div class="number">8</div>
+        <div class="number">9</div>
+        <div class="number">10</div>
+        <div class="number">11</div>
+        <div class="number">12</div>
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
         <div class="hand second-hand"></div>
@@ -51,30 +63,31 @@
 
     .clock-face {
       position: relative;
-      width: 100%;
       height: 100%;
-      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+    .number {
+      position: absolute;
+      top: 0;
+      /* transform: rotate(30deg) */
     }
 
     .hand {
-      width:50%;
-      height:6px;
-      background:black;
       position: absolute;
-      top:50%;
-      transform: rotate(90deg);
-      transform-origin: right center;
+      top: 50%;
+      left: 50%;
     }
     .hour-hand {
+      width: 30%;
       background: #fa5252;
       height: 6px;
-      
     }
     .second-hand {
+      width: 50%;
       background: #2f9e44;
       height: 2px;
     }
     .min-hand {
+      width: 45%;
       background: #f59f00;
       height: 4px;
     }
@@ -116,12 +129,15 @@
     }
 
     document.addEventListener('DOMContentLoaded', ()=>{
-      startTimer();
+      // startTimer();
       })
   })(document)
 
   // question1
   // const hour = qs('.hand hour-hand') 클래스 중첩 찾는 법?
+
+  // question2
+  // width값 바꾸면 왜 이상해지지
   </script>
 </body>
 </html>
