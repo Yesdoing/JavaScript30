@@ -68,16 +68,12 @@
   
       const handlerControllerChanged = ({target})=>{
         if(target.nodeName!=='INPUT') return ;
-
-        const isbase = target.id==='base';
         const sizing = target.dataset.sizing||'';
-        const changedValue = target.value+sizing
-
-        img.style.setProperty(`--${target.id}`, changedValue);
-        if(base) qs('.hl').style.setProperty(`--${target.id}`,changedValue); 
+        document.documentElement.style.setProperty(`--${target.name}`, target.value+sizing);
       }
 
       qs('.controls').addEventListener('change', handlerControllerChanged)
+      qs('.controls').addEventListener('mousemove', handlerControllerChanged)
     })
 
     })(document)

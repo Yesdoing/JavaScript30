@@ -30,4 +30,19 @@ Javascript 에서의 CSS Variable API 또한 문서 아래쪽에 있습니다.
 
 1. 문제를 잘 보자 ... data-sizing을 왜 해줬나? 
 ` const suffix = dataset.sizing || '';
-`
+
+
+답보면서 
+1. `data.set` 활용  
+2.id보단 name으로 맵핑했는데 이유가 있는지 알아보기 
+3.`qs('.controls').addEventListener('mousemove', handlerControllerChanged)` 마우스 무브 이벤트는 안 되는 것 같다 _=
+4. 
+```js
+inputs.forEach(input => input.addEventListener('change', handleUpdate));
+inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+답에서 forEach한 번에 왜 같이 넣지는 않았을까?
+
+```
+
+5. `document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);`
+이거 css변수 활용한다면 전체를 다 바뀐 부분으로 바꿔줄 수 있어서 좋은 것 같다. document.documentElement
