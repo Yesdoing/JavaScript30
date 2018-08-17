@@ -21,10 +21,24 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
-
+    :root {
+      --padding: 10px;
+      --filter: blur(4px);
+      --background-color: orange
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
+
+    img {
+      padding: var(--padding);
+      filter: var(--filter);
+      background-color: var(--background-color);
+    }
+
+    .hl {
+      color: var(--background-color);
+    }
 
     body {
       text-align: center;
@@ -45,6 +59,20 @@
   </style>
 
   <script>
+    ((window, document) => {
+      var elem = document.styleSheets[0].cssRules[0].style;
+      const $spacing = document.querySelector('#spacing');
+      const $blur = document.querySelector('#blur');
+      const $base = document.querySelector('#base');
+      const $inputs = document.querySelectorAll('input');
+      const $hl = document.querySelector('.hl');
+
+      Array.from($inputs).forEach(input => input.addEventListener('input', function () {
+        elem.setProperty('--padding', $spacing.value + 'px');
+        elem.setProperty('--filter', `blur(${$blur.value}px)`);
+        elem.setProperty('--background-color', $base.value);
+      }));
+    })(window, document);
   </script>
 
 </body>
