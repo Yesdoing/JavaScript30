@@ -76,7 +76,7 @@
 
       rotate() {
         Object.values(this.$clockHands).map($clockHand => {
-          const rad = $clockHand.currentTime() * 6;
+          const rad = $clockHand.currentTime() * $clockHand.interval;
           $clockHand.dom.style.transformOrigin = 'right';
           $clockHand.dom.style.transform = `rotate(${90 + rad}deg)`
         })
@@ -90,14 +90,17 @@
     const $clockHands = {
       second: {
         dom: d.querySelector('.second-hand'),
+        interval: 6,
         currentTime() { return new Date().getSeconds() }
       },
       min: {
         dom: d.querySelector('.min-hand'),
+        interval: 6,
         currentTime() { return new Date().getMinutes() }
       },
       hour: {
         dom: d.querySelector('.hour-hand'),
+        interval: 30,
         currentTime() { return new Date().getHours() }
       },
     };
