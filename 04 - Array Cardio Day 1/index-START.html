@@ -26,34 +26,127 @@
       { first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 },
       { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
     ];
-
+    
     const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
+    // 몇 년도에 태어났다. 
+
+    // 변수를 어떻게 넣지 regex 안에 그 부분이 힘듬 _=
+    const isBorn = checkYear=>inputYear=> {
+      const yearString = (inputYear).toString()
+      // new RegExp(`${checkYear}/\d/\d`,"gi") 이 부분 잘 모르겠다 
+      return yearString.startsWith(checkYear)&&yearString.length===4
+    }
+   
+    const fifthBorn = isBorn(15)
+    const result_one = inventors.filter(person=>fifthBorn(person.year))
+
+    console.dir(result_one);
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    
+    const result_two = inventors.map(person=>({
+       'first': person.first,
+      'last': person.last,
+    }));
+
+    const compare = (a,b)=> a>b ? 1 : a<b ? -1 : 0
+ 
+
+    console.dir(result_two);
+
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    // 어이가 없는 부분 발견 ... 
+    // 아래 주석 구문 처럼 실행하면 제대로 실행이 안 되는데 왜??? 나중 값을 변화시켜서 그런지 
+    // inventors.sort((a,b)=>compare(b.year, a.year));
+    // 이 부분 ? 도저히 이해가 안 감 
+    const result_three = [...inventors].sort((a,b)=>compare(b.year, a.year));
+
+     console.dir(result_three);
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const getLiveYear = p => p.passed-p.year
 
+    const result_four = inventors.reduce((ac,c) => {
+      return ac+= getLiveYear(c)
+    },0)
+
+     console.dir(result_four);
     // 5. Sort the inventors by years lived
+    const result_five = inventors.sort((a,b) =>{
+      return compare(getLiveYear(b),getLiveYear(a))
+    });
 
+       console.dir(result_five);
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    const boulevards = [
+      "Boulevards of Paris",
+      "City walls of Paris",
+      "Thiers wall",
+      "Wall of Charles V",
+      "Wall of Philip II Augustus",
+      "City gates of Paris",
+      "Haussmann's renovation of Paris",
+      "Boulevards of the Marshals",
+      "Boulevard Auguste-Blanqui",
+      "Boulevard Barbès",
+      "Boulevard Beaumarchais",
+      "Boulevard de l'Amiral-Bruix",
+      "Boulevard des Capucines",
+      "Boulevard de la Chapelle",
+      "Boulevard de Clichy",
+      "Boulevard du Crime",
+      "Boulevard Haussmann",
+      "Boulevard de l'Hôpital",
+      "Boulevard des Italiens",
+      "Boulevard de la Madeleine",
+      "Boulevard de Magenta",
+      "Boulevard Montmartre",
+      "Boulevard du Montparnasse",
+      "Boulevard Raspail",
+      "Boulevard Richard-Lenoir",
+      "Boulevard de Rochechouart",
+      "Boulevard Saint-Germain",
+      "Boulevard Saint-Michel",
+      "Boulevard de Sébastopol",
+      "Boulevard de Strasbourg",
+      "Boulevard du Temple",
+      "Boulevard Voltaire",
+      "Boulevard de la Zone"
+    ];
 
+    const result_six = boulevards.filter(v=>v.match('de'))
+    console.dir(result_six);
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    // Array.prototype.filter()
 
+    const result_seven = [...people].sort((a,b)=>{
+      const lastNameA = a.split(',')[1]
+      const lastNameB = b.split(',')[1]
+      return compare(lastNameA, lastNameB)
+    })
+
+    console.dir(result_seven)
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    
+    const countKinds = data.reduce((ac, c)=> {
+      ac[c]===undefined ? ac[c] = 1 : ac[c] +=1
+      return ac;
+    },{})
+    console.dir(countKinds);
   </script>
 </body>
 </html>
+
