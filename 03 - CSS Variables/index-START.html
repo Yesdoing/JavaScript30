@@ -43,8 +43,20 @@
       width:100px;
     }
   </style>
-
+  <script
+  src="https://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
   <script>
+    $('#spacing').on('change', function(){
+      $('img').css('padding', this.value);
+    });
+    $('#blur').on('change', function(){
+      $('img').css('filter', 'blur('+this.value+'px)');
+    });
+    $('#base').on('change', function(){
+      $('body').css('background-color', this.value);
+    });
   </script>
 
 </body>
