@@ -2,15 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Array Cardio 💪</title>
+  <title>Title</title>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+  <style>
+    table, div {
+      width: 70%;
+      margin: 30px auto;
+      font-family: 'Noto Sans', sans-serif;
+    }
+    
+    div {
+      text-align: center;
+    }
+    
+    table {
+      border-collapse: collapse;
+    }
+    
+    caption {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+    thead {
+      background: #FAFAFA;
+      text-align: center;
+    }
+    
+    td {
+      padding: 7px;
+      border-bottom: 1px solid #E8E8E8;
+    }
+    
+    .lives {
+      font-weight: bold;
+    }
+    
+  </style>
 </head>
 <body>
-<p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
-<script>
+<div class="table-container"></div>
+<script type="module">
   // Get your shorts on - this is an array workout!
   // ## Array Cardio Day 1
-
+  import { createArrayObjectTable, createArrayTable, createOneLineBox } from './src/index.js';
+  import render from './src/render.js';
+  
   // Some data we can work with
+
+  const TABLE_CONTAINER = '.table-container';
 
   const inventors = [
     {first: 'Albert', last: 'Einstein', year: 1879, passed: 1955},
@@ -32,16 +72,21 @@
   // Array.prototype.filter()
   // 1. Filter the list of inventors for those who were born in the 1500's
   const bornIn1500s = inventors.filter(inventor => inventor.year.toString().startsWith('15'));
+  render(TABLE_CONTAINER, createArrayObjectTable(bornIn1500s, '1. Inventors born in the 15th century'));
   console.table(bornIn1500s);
 
   // Array.prototype.map()
   // 2. Give us an array of the inventors' first and last names
-  const inventorNames = inventors.map(({first, last}) => [first, last]);
+  const inventorNames = inventors.map(({first, last}) => {
+    return { FirstName: first, LastName: last }
+  });
+  render(TABLE_CONTAINER, createArrayObjectTable(inventorNames, '2. Inventor Names Only'));
   console.table(inventorNames);
 
   // Array.prototype.sort()
   // 3. Sort the inventors by birthdate, oldest to youngest
   const ageDescending = inventors.sort((a, b) => b.year - a.year);
+  render(TABLE_CONTAINER, createArrayObjectTable(ageDescending, '3. Sort By Age'));
   console.table(ageDescending);
 
   // Array.prototype.reduce()
@@ -49,9 +94,14 @@
   const totalLives = inventors.reduce((acc, curr) => {
     return acc + (curr.passed - curr.year)
   }, 0);
+  
+  render(TABLE_CONTAINER, createOneLineBox('4. Total Lifespan', totalLives, 'lives'));
   console.log(totalLives);
 
   // 5. Sort the inventors by years lived
+  const sortByLifespan = inventors.sort((a, b) => (b.passed - b.year) - (a.passed - a.year));
+  render(TABLE_CONTAINER, createArrayObjectTable(sortByLifespan, '5. Sort By Lifespan'));
+  console.table(sortByLifespan);
 
   const boulevards = [
     'Boulevards of Paris',
@@ -91,13 +141,15 @@
   // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
   // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
   const includeDE = boulevards.filter(boulevard => ~boulevard.indexOf('de'));
-  console.log(includeDE);
+  render(TABLE_CONTAINER, createArrayTable(includeDE, '6. Boulevard with the word "DE"'));
+  console.table(includeDE);
 
   // 7. sort Exercise
   // Sort the people alphabetically by last name
   const sortedPeople = people.sort((a, b) => {
     return a.split(',')[1].trim().charCodeAt(0) - b.split(',')[1].trim().charCodeAt(0)
   });
+  render(TABLE_CONTAINER, createArrayTable(sortedPeople, '7. Sort By Last Name'));
   console.log(sortedPeople);
 
   // 8. Reduce Exercise
@@ -107,7 +159,7 @@
     curr in acc && (acc[curr] += 1) || (acc[curr] = 1);
     return acc
   }, {});
-  console.table(counter);
+  render(TABLE_CONTAINER, createArrayObjectTable([counter], '8. Sum up the instances of each of these'));
 </script>
 </body>
 </html>
