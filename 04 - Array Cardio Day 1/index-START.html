@@ -48,30 +48,28 @@
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
     
-    const result_two = inventors.map(person=>({
-       'first': person.first,
-      'last': person.last,
-    }));
+    const result_two = inventors.map(({first, last})=>[first,last])
+  
 
-    const compare = (a,b)=> a>b ? 1 : a<b ? -1 : 0
- 
+    // const result_two = inventors.map(({first, last})=>[first,last]);
+
+    const compare = (a,b)=> a>b ? 1 : -1  
 
     console.dir(result_two);
-
+    console.table(result_two)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
-    // 어이가 없는 부분 발견 ... 
-    // 아래 주석 구문 처럼 실행하면 제대로 실행이 안 되는데 왜??? 나중 값을 변화시켜서 그런지 
-    // inventors.sort((a,b)=>compare(b.year, a.year));
-    // 이 부분 ? 도저히 이해가 안 감 
-    const result_three = [...inventors].sort((a,b)=>compare(b.year, a.year));
+ 
+    const result_three = inventors.sort((a,b)=>compare(b.year, a.year));
 
-     console.dir(result_three);
+     console.table(result_three);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+
+    // compare랑 getLiveYear뺀 거는 좀 오바인 것 같다. compare는 모르겠다. 나름 괜찮은 것 같기도 하고 
     const getLiveYear = p => p.passed-p.year
 
     const result_four = inventors.reduce((ac,c) => {
@@ -145,7 +143,7 @@
       ac[c]===undefined ? ac[c] = 1 : ac[c] +=1
       return ac;
     },{})
-    console.dir(countKinds);
+    console.table(countKinds);
   </script>
 </body>
 </html>
