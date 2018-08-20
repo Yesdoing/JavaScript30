@@ -22,8 +22,10 @@
     }
 
     .panels {
+      display: flex;
       min-height:100vh;
       overflow: hidden;
+      flex: 5;
     }
 
     .panel {
@@ -41,6 +43,14 @@
       font-size: 20px;
       background-size:cover;
       background-position:center;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .panel:hover {
+      flex: 2;
     }
 
 
