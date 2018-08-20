@@ -72,3 +72,27 @@ sort사용 객체 일 때는 객체 값을 비교해줘서 return 값을 해줘�
     }
 
 ```
+
+### table 부분 렌더링으로 바꿔보기 
+뭔가 중복 코딩이 많은 것 같은데 ...
+```js
+       const tableHeading = data=>{
+          let heading = `<li class="table-heading">`
+          for(key in data){
+            heading +=`<span>${key}</span>`
+          }
+          heading+=`</li>`
+          return heading;
+       }
+       const tableCellTemplate = (data, index) => {  
+       let tableCell = `<li class="table-cell">`;
+         tableCell += `<span>${index}</span>`
+          for(key in data){
+            tableCell +=`<span>${data[key]}</span>`
+          }
+          tableCell+=`</li>`
+          return tableCell;
+       }
+
+
+```

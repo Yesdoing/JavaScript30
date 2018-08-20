@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
+  <style>
+    
+    .table-cell , .table-heading  {
+      display: flex;
+      justify-content: space-around;
+      align-items: center
+    }
+    li {
+      list-style: none;
+    }
+  </style>
 </head>
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
@@ -33,6 +44,33 @@
     // 1. Filter the list of inventors for those who were born in the 1500's
 
     // 몇 년도에 태어났다. 
+  
+       const tableHeading = data=>{
+          let heading = `<li class="table-heading">`
+          for(key in data){
+            heading +=`<span>${key}</span>`
+          }
+          heading+=`</li>`
+          return heading;
+       }
+       const tableCellTemplate = (data, index) => {  
+       let tableCell = `<li class="table-cell">`;
+         tableCell += `<span>${index}</span>`
+          for(key in data){
+            tableCell +=`<span>${data[key]}</span>`
+          }
+          tableCell+=`</li>`
+          return tableCell;
+       }
+       const tableTemplate = data =>{
+         let container = `<ul class="table">`
+          const contents = data.reduce((ac,c,ci)=>{
+            return ac+=tableCellTemplate(c,ci)
+          }, tableHeading(data[0]))
+          container+=contents
+          container+=`</ul>`
+          return container;
+       }
 
     // 변수를 어떻게 넣지 regex 안에 그 부분이 힘듬 _=
     const isBorn = checkYear=>inputYear=> {
@@ -44,7 +82,9 @@
     const fifthBorn = isBorn(15)
     const result_one = inventors.filter(person=>fifthBorn(person.year))
 
-    console.dir(result_one);
+    document.body.insertAdjacentHTML('beforeend', tableTemplate(result_one));
+
+    console.dir(tableTemplate(result_one));
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
     
@@ -55,7 +95,7 @@
 
     const compare = (a,b)=> a>b ? 1 : -1  
 
-    console.dir(result_two);
+    // console.dir(result_two);
     console.table(result_two)
 
     // Array.prototype.sort()
@@ -65,7 +105,7 @@
     const result_three = inventors.sort((a,b)=>compare(b.year, a.year));
 
      console.table(result_three);
-
+     document.body.insertAdjacentHTML('beforeend', tableTemplate(result_three));
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
 
