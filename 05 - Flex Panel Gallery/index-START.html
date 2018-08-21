@@ -50,9 +50,27 @@
       flex-direction: column;
     }
     .panel:hover {
-      flex: 2;
+      flex: 6;
     }
-
+    .panel:hover p:nth-child(2) {
+      transition: all 0.1s;
+      font-size: 8em;
+    }
+    .panel:hover p:nth-child(1), .panel:hover p:nth-child(3) {
+      transform: translateY(0);
+    }
+    .panel p{
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .panel p:nth-child(1) {
+      transform: translateY(-100%);
+    }
+    .panel p:nth-child(3) {
+      transform: translateY(100%);
+    }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
     .panel2 { background-image:url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500); }
